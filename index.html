@@ -76,6 +76,25 @@
     color:var(--bone); letter-spacing:0.03em; border-bottom:none; padding:6px 0;
   }
   .nav-mark:hover{color:var(--teal);}
+
+  .nav-right{display:flex; align-items:center; gap:16px;}
+  .btn-cv{
+    display:inline-flex; align-items:center; gap:7px;
+    background:var(--teal); color:var(--ink); border-bottom:none;
+    font-family:'JetBrains Mono', monospace; font-weight:600; font-size:12px;
+    letter-spacing:0.03em; text-transform:uppercase;
+    padding:8px 14px; border-radius:6px; white-space:nowrap;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .btn-cv:hover{background:var(--bone); color:var(--ink); transform:translateY(-1px);}
+  .btn-cv svg{width:13px; height:13px; flex-shrink:0;}
+  @media (max-width:480px){
+    .btn-cv .cv-full{display:none;}
+    .btn-cv .cv-short{display:inline;}
+  }
+  @media (min-width:481px){
+    .btn-cv .cv-short{display:none;}
+  }
   .nav-links{
     list-style:none; display:flex; align-items:center; gap:22px; margin:0; padding:0;
   }
@@ -304,14 +323,22 @@
 <nav class="topnav">
   <div class="nav-inner">
     <a class="nav-mark" href="#top">SC</a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav()">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav-right">
+      <a class="btn-cv" href="https://raw.githubusercontent.com/sherry-huiyu-chien/sherry-huiyu-chien.github.io/main/Chien_CV_2026.05.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M4 19h16"/></svg>
+        <span class="cv-full">Download CV</span>
+        <span class="cv-short">CV</span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
     <ul class="nav-links" id="nav-links">
       <li><a href="#about" onclick="closeNav()">About</a></li>
+      <li><a href="#research" onclick="closeNav()">Research</a></li>
       <li><a href="#publications" onclick="closeNav()">Publications</a></li>
       <li><a href="#talks" onclick="closeNav()">Talks</a></li>
-      <li><a href="#research" onclick="closeNav()">Research</a></li>
+      <li><a href="#projects" onclick="closeNav()">Projects</a></li>
       <li><a href="#teaching" onclick="closeNav()">Teaching</a></li>
       <li><a href="#awards" onclick="closeNav()">Awards</a></li>
       <li><a href="#service" onclick="closeNav()">Service</a></li>
@@ -325,7 +352,7 @@
   <div class="hero-inner">
     <span class="eyebrow">Department of Linguistics · UC Santa Barbara</span>
     <h1>Sherry Chien<span class="zh">簡慧宇</span></h1>
-    <p class="role">PhD Candidate researching how <em>focus</em> and <em>prosody</em> shape spoken language — from Taiwan Mandarin tone to the L2 English of Mandarin speakers.</p>
+    <p class="role">Phonetician and laboratory phonologist studying how speakers use <em>prosody</em> — pitch, timing, and articulation — to mark focus, organize rhythm, and shape meaning, from Taiwan Mandarin tone to second-language English.</p>
 
     <div class="contour-wrap">
       <svg class="contour" viewBox="0 0 720 120" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustrative pitch contour with four pitch accents">
@@ -356,13 +383,47 @@
       <span class="eyebrow">Focus</span>
       <h2>About</h2>
       <div class="about-grid">
-        <p>I'm a PhD candidate in Linguistics at UC Santa Barbara, working on the acoustics and articulation of prosody — how speakers use pitch, timing, and articulatory movement to mark focus, and how those patterns transfer (or don't) when Taiwan Mandarin speakers produce English. My work combines acoustic analysis, electromagnetic articulography, and cross-linguistic comparison, with recent extensions into Estonian foot structure and Tokyo Japanese mora timing.</p>
+        <p>I'm a phonetician and laboratory phonologist — a PhD candidate in Linguistics at UC Santa Barbara — studying how prosody organizes speech and conveys meaning. My work asks how speakers mark focus, how prosodic boundaries interact with that marking, and how linguistic rhythm emerges from the interplay of syllables, feet, and phrases. I approach these questions with electromagnetic articulography (EMA), acoustic analysis, corpus methods, and perception experiments, across typologically diverse languages including Taiwan Mandarin, Estonian, and Tokyo Japanese.</p>
         <p>Before UCSB, I completed an MA in Linguistics at National Taiwan University and a BA in English at National Kaohsiung Normal University, where I trained and worked as an EFL teacher — a thread that still runs through my interest in second-language prosody.</p>
         <div class="diss">
           <span class="eyebrow">Dissertation (working title)</span>
           The Interaction between Focus Structure and Prosodic Structure in Taiwan Mandarin
           <div style="margin-top:8px; color:var(--muted); font-size:13.5px;">Passed PhD Candidacy Qualifying Exam with Distinction</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH PROGRAM -->
+  <section id="research">
+    <div class="wrap">
+      <span class="eyebrow">Program</span>
+      <h2>Research</h2>
+      <p class="lede">My research asks how speakers use prosody to mark focus, organize utterances into constituents, and build linguistic rhythm — and how those systems are acquired in a second language. Four threads run through this work.</p>
+
+      <div class="ra-item">
+        <div class="ra-title">Focus and the Tone–Intonation Interaction</div>
+        <div class="ra-desc">In tonal languages, pitch already carries lexical meaning, so marking focus means layering phrase-level intonation on top of lexical tone without erasing it. Using EMA data from Taiwan Mandarin, I ask whether focus is a distinct layer of structure or an emergent effect of tone-intonation interaction, and whether the hierarchy of focus types documented in stress languages like English and German also holds in a tone language.</div>
+      </div>
+
+      <div class="ra-item">
+        <div class="ra-title">Prominence and Boundary as a Unified System</div>
+        <div class="ra-desc">Prominence and boundary marking are usually treated as separate parts of prosody. A second EMA study of Taiwan Mandarin tests whether they instead arise from one coupled dynamical system — whether the location of focus shapes where a prosodic boundary falls, and whether boundary placement can itself signal focus.</div>
+      </div>
+
+      <div class="ra-item">
+        <div class="ra-title">Linguistic Rhythm</div>
+        <div class="ra-desc">With Argyro Katsika and Matthew Gordon, I'm re-examining the classic stress-timed / syllable-timed rhythm typology across 272 genetically and areally diverse languages. The pattern so far: rhythm isn't set by any single level like the syllable or foot, but by how syllable, foot, word, and phrase interact. Related EMA work traces how moraic structure governs phrase-final lengthening in Tokyo Japanese, and how vowel length and metrical structure interact in Estonian.</div>
+      </div>
+
+      <div class="ra-item">
+        <div class="ra-title">Second Language Prosody</div>
+        <div class="ra-desc">How do L1 Taiwan Mandarin speakers acquire the prosody of L2 English — and which patterns are L1 transfer versus a more general developmental path? Mandarin speakers tend to mark focus in English by lengthening and raising pitch across the whole word rather than just the stressed syllable, a signature of L1 transfer. Meanwhile, accent acquisition follows a broader trajectory: salient, categorical features like nuclear accents are learned before finer phonetic detail like pitch alignment.</div>
+      </div>
+
+      <div class="diss" style="margin-top:8px;">
+        <span class="eyebrow">Looking ahead</span>
+        Building the articulatory evidence for how tone and intonation combine, testing the prominence–boundary hypothesis directly, and connecting prosodic typology to L2 learning trajectories — eventually extending into discourse, turn-taking, and naturalistic conversation using EMA, ultrasound, EGG, and eye-tracking.
       </div>
     </div>
   </section>
@@ -478,10 +539,10 @@
   </section>
 
   <!-- RESEARCH ASSISTANTSHIPS -->
-  <section id="research">
+  <section id="projects">
     <div class="wrap">
       <span class="eyebrow">Current work</span>
-      <h2>Research Assistantships</h2>
+      <h2>Current Projects</h2>
       <div class="ra-item">
         <div class="ra-title">Rhythm Typology Project <span class="ra-role">Leader of undergraduate RAs · 2022–present</span></div>
         <div class="ra-desc">PI: Dr. Matthew Gordon &amp; Dr. Argyro Katsika, UCSB. Leading and instructing 38 undergraduate RAs on Praat segmentation across recordings of 75+ genetically and areally diverse languages from JIPA; running weekly project meetings.</div>
