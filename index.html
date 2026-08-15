@@ -57,9 +57,76 @@
 
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px; position:relative; z-index:1;}
 
+  /* ---------- NAV ---------- */
+  body{padding-top:60px;}
+  nav.topnav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    height:60px;
+    background:rgba(20,23,28,0.86);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1040px; margin:0 auto; padding:0 24px; height:60px;
+    display:flex; align-items:center; justify-content:space-between;
+    position:relative;
+  }
+  .nav-mark{
+    font-family:'JetBrains Mono', monospace; font-weight:600; font-size:14px;
+    color:var(--bone); letter-spacing:0.03em; border-bottom:none; padding:6px 0;
+  }
+  .nav-mark:hover{color:var(--teal);}
+  .nav-links{
+    list-style:none; display:flex; align-items:center; gap:22px; margin:0; padding:0;
+  }
+  .nav-links a{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--bone-dim); border-bottom:1px solid transparent;
+    padding:4px 0; white-space:nowrap;
+  }
+  .nav-links a:hover{color:var(--teal); border-bottom-color:var(--teal-dim);}
+  .nav-links a.active{color:var(--teal); border-bottom-color:var(--teal);}
+
+  .nav-toggle{
+    display:none; background:none; border:none; cursor:pointer; padding:8px; margin:-8px;
+    width:36px; height:36px; position:relative; z-index:110;
+  }
+  .nav-toggle span{
+    display:block; position:absolute; left:8px; right:8px; height:2px; background:var(--bone);
+    transition:transform .25s ease, opacity .25s ease;
+  }
+  .nav-toggle span:nth-child(1){top:12px;}
+  .nav-toggle span:nth-child(2){top:18px;}
+  .nav-toggle span:nth-child(3){top:24px;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+  @media (max-width:780px){
+    .nav-toggle{display:block;}
+    .nav-links{
+      position:fixed; top:60px; left:0; right:0; bottom:0;
+      flex-direction:column; align-items:flex-start; gap:0;
+      background:var(--ink); border-top:1px solid var(--line);
+      padding:8px 24px 40px;
+      transform:translateY(-8px); opacity:0; pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease;
+      overflow-y:auto;
+    }
+    .nav-links.open{
+      transform:translateY(0); opacity:1; pointer-events:auto;
+    }
+    .nav-links a{
+      width:100%; padding:16px 0; font-size:14px; border-bottom:1px solid var(--line);
+    }
+    .nav-links a.active{border-bottom-color:var(--line);}
+  }
+
+  section, header.hero, footer{scroll-margin-top:60px;}
+
   /* ---------- HERO ---------- */
   header.hero{
-    padding:96px 0 64px;
+    padding:64px 0 64px;
     border-bottom:1px solid var(--line);
     position:relative;
     overflow:hidden;
@@ -234,7 +301,27 @@
 <body>
 <div class="grain"></div>
 
-<header class="hero">
+<nav class="topnav">
+  <div class="nav-inner">
+    <a class="nav-mark" href="#top">SC</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about" onclick="closeNav()">About</a></li>
+      <li><a href="#publications" onclick="closeNav()">Publications</a></li>
+      <li><a href="#talks" onclick="closeNav()">Talks</a></li>
+      <li><a href="#research" onclick="closeNav()">Research</a></li>
+      <li><a href="#teaching" onclick="closeNav()">Teaching</a></li>
+      <li><a href="#awards" onclick="closeNav()">Awards</a></li>
+      <li><a href="#service" onclick="closeNav()">Service</a></li>
+      <li><a href="#skills" onclick="closeNav()">Skills</a></li>
+      <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
   <div class="hero-inner">
     <span class="eyebrow">Department of Linguistics · UC Santa Barbara</span>
     <h1>Sherry Chien<span class="zh">簡卉育</span></h1>
@@ -520,7 +607,7 @@
 
 </main>
 
-<footer>
+<footer id="contact">
   <div class="wrap">
     <span class="eyebrow">Get in touch</span>
     <h2>Let's talk prosody</h2>
@@ -534,6 +621,36 @@
 </footer>
 
 <script>
+  function toggleNav(){
+    document.getElementById('nav-toggle').classList.toggle('open');
+    document.getElementById('nav-links').classList.toggle('open');
+    const btn = document.getElementById('nav-toggle');
+    btn.setAttribute('aria-expanded', btn.classList.contains('open'));
+  }
+  function closeNav(){
+    document.getElementById('nav-toggle').classList.remove('open');
+    document.getElementById('nav-links').classList.remove('open');
+    document.getElementById('nav-toggle').setAttribute('aria-expanded', 'false');
+  }
+
+  // scroll-spy: highlight the nav link for the section in view
+  (function(){
+    const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+    const sections = navLinks
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+    if(!('IntersectionObserver' in window) || sections.length === 0) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const id = '#' + entry.target.id;
+          navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+    sections.forEach(s => io.observe(s));
+  })();
+
   function switchTab(name){
     document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', 'false'));
     document.querySelectorAll('.tabpanel').forEach(p => p.classList.remove('active'));
