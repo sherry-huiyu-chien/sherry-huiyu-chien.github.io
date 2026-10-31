@@ -287,20 +287,6 @@
     <h1>Sherry Chien<span class="zh">簡慧宇</span></h1>
     <p class="role">I am a PhD Candidate in Linguistics at the University of California, Santa Barbara, and a member of the Speech, Prosody, and Articulatory Kinematics (SPArK) Laboratory led by Argyro Katsika. I am a phonetician and laboratory phonologist whose research investigates prosody. My work is motivated by fundamental questions about how prosody interacts with focus, phrase structure, and linguistic rhythm across diverse languages, and how these patterns are acquired in second language (L2) contexts</p>
 
-    <div class="contour-wrap">
-      <svg class="contour" viewBox="0 0 720 120" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Illustrative pitch contour with four pitch accents">
-        <path class="f0" d="M10,90 C 60,88 90,40 130,36 C 170,32 190,80 230,84 C 270,88 300,20 340,18 C 380,16 410,70 450,74 C 490,78 520,30 560,26 C 600,22 630,66 670,70 L 710,72" />
-        <circle class="accent-dot" cx="130" cy="36" r="4.5"></circle>
-        <circle class="accent-dot" cx="340" cy="18" r="4.5"></circle>
-        <circle class="accent-dot" cx="450" cy="74" r="4.5"></circle>
-        <circle class="accent-dot" cx="560" cy="26" r="4.5"></circle>
-        <text x="118" y="55"> </text>
-        <text x="330" y="12"> </text>
-        <text x="440" y="94"> </text>
-        <text x="548" y="46"> </text>
-      </svg>
-    </div>
-
     <div class="hero-meta">
       <span>Santa Barbara, CA</span>
       <a href="mailto:sherrychien@ucsb.edu">sherrychien@ucsb.edu</a>
@@ -562,12 +548,6 @@
     document.querySelectorAll('.tabpanel').forEach(p => p.classList.remove('active'));
     document.getElementById('tab-' + name).setAttribute('aria-selected', 'true');
     document.getElementById('panel-' + name).classList.add('active');
-  }
-  function toggleAwards(){
-    const el = document.getElementById('more-awards');
-    const btn = document.getElementById('award-toggle');
-    const showing = el.classList.toggle('show');
-    btn.textContent = showing ? 'Show fewer awards' : 'Show earlier awards';
   }
 </script>
 
